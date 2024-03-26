@@ -16,13 +16,7 @@ export default class AbstractLayout {
         let verticalCenterAlign = this.height * 0.9;
 
 
-        let center = {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0,
-            color: ""
-        }
+        let center = { }
 
         center.x = this.width / 2 - verticalCenterAlign / 2;
         center.y = this.height / 2 - verticalCenterAlign / 2;
@@ -78,8 +72,6 @@ export default class AbstractLayout {
 
                     const layoutKey = key;
                     const layoutValue = layout[key];
-
-                    console.log('layoutKey: ' + layoutKey + ' = ' + layoutValue);
 
                     this.context.fillStyle = layout['color'];
                     this.context.fillRect(layout['x'], layout['y'], layout['width'], layout['height']);

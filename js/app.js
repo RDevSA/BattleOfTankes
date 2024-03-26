@@ -1,4 +1,4 @@
-import AbstractLayout from "./layouts/AbstractLayout.js";
+import Layouts from "./layouts/Layouts.js";
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
@@ -6,9 +6,6 @@ const ctx = canvas.getContext('2d');
 canvas.height = document.documentElement.clientHeight;
 canvas.width = document.documentElement.clientWidth;
 
-ctx.fillRect(0, 0, 50, 50);
-console.log('document height = ' + canvas.height);
-
-let abstractLayout = new AbstractLayout(ctx,canvas.width,canvas.height);
-abstractLayout.createLayout();
+let layouts = new Layouts(ctx,canvas.width,canvas.height);
+layouts.createLayout();
 
