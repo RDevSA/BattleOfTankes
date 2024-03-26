@@ -1,4 +1,4 @@
-export default class AbstractLayout {
+export default class Layouts {
 
     constructor(context, width, height) {
         this.context = context;
@@ -13,10 +13,10 @@ export default class AbstractLayout {
     createLayout() {
 
         //this.baseUnit = this.game_height / numBlocks;
-        let verticalCenterAlign = this.height * 0.9;
+        let verticalCenterAlign = this.height;
 
 
-        let center = { }
+        let center = {}
 
         center.x = this.width / 2 - verticalCenterAlign / 2;
         center.y = this.height / 2 - verticalCenterAlign / 2;
@@ -24,7 +24,6 @@ export default class AbstractLayout {
         center.height = verticalCenterAlign;
         center.color = 'orange';
 
-       
 
         let left = {
             x: 0,
@@ -35,7 +34,7 @@ export default class AbstractLayout {
             color: "blue"
         };
 
-         let right = {
+        let right = {
             x: left.width + this.height,
             //x: center.x + center.width,
             y: 0,
@@ -46,24 +45,19 @@ export default class AbstractLayout {
         }
 
 
-        this.layouts = [left, center,right,];
+        this.layouts = [left, center, right,];
 
-        //console.log('createLayout: '+this.layout.indexOf('right'));
+
+        console.log('left x: ' + left.x +' left width: '+ left.width);
+        console.log('center: ' + this.height);
+        console.log('right x: ' + right.x +' right width: '+ right.width);
+        console.log('width: '+this.width);
+
         this.draw();
 
     }
 
     draw() {
-
-        //console.log('layout = ' + layout.x[1] + "; " + layout.y[1]);
-
-        // for (const key in this.layouts) {
-        //     if (this.layouts.hasOwnProperty.call(this.layouts, key)) {
-        //         const element = this.layouts[key].x;
-        //         console.log('draw x: '+element);
-
-        //     }
-        // }
 
         for (const layout of this.layouts) {
 
@@ -79,17 +73,6 @@ export default class AbstractLayout {
                 }
             }
         }
-
-
-        //this.context.fillStyle = this.layouts[1].color;
-        //this.context.fillRect(this.layouts[1].x, this.layouts[1].y, this.layouts[1].width, this.layouts[1].height);
-
-        // for (const key in this.layout) {
-        //     const element = this.layout[key];
-        //     console.log(element);
-        // }
-
-
 
     }
 
