@@ -6,6 +6,6 @@ const ctx = canvas.getContext('2d');
 canvas.height = document.documentElement.clientHeight;
 canvas.width = document.documentElement.clientWidth;
 
-let layouts = new Layouts(ctx,canvas.width,canvas.height);
-layouts.createLayout();
+let layouts = new Layouts(canvas.width,canvas.height);
+layouts.draw(ctx);
 

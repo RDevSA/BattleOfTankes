@@ -9,12 +9,15 @@ export default class Player {
         this.speedX = 0;
     }
 
+    
+
     update(){
         this.x += this.speedX;
         this.y += this.speedY;
     }
 
     draw(context){
+        context.fillStyle = 'red';
         context.fillRect(this.x,this.y,this.width,this.height);
     }
 }
