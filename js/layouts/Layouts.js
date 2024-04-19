@@ -8,18 +8,14 @@ export default class Layouts {
 
         this.layouts = [];
 
-        this.content = [];
-
         this.numBlocks = 15;
         this.baseUnit = this.width / this.numBlocks;
 
-        this.player = new Player(this, this.baseUnit);
+
 
     }
 
     createLayout() {
-
-        this.content.push(this.player);
 
         let verticalCenterAlign = this.height;
         let center = {}
@@ -30,6 +26,7 @@ export default class Layouts {
         center.height = verticalCenterAlign;
         center.color = 'orange';
         center.content = this.content;
+
         
         let left = {
             x: 0,
@@ -52,15 +49,27 @@ export default class Layouts {
 
         this.layouts = [left, center, right,];
 
+        
+    }
+
+    createContentCenter(){
+        
+        this.createLayout();
+        //let x = this.createLayout().center.x;
+
+        this.player = new Player(this, 120, 200, 'red');
+        this.enemy = new Player(this,120, 100,'orange');
+        this.content = [this.player,this.enemy];
     }
 
     update() {
         this.player.update();
+        this.enemy.update();
     }
 
     draw(context) {
 
-        this.createLayout();
+        this.createContentCenter();
 
         for (const layout of this.layouts) {
             for (const key in layout) {
@@ -76,6 +85,7 @@ export default class Layouts {
         }
 
         this.player.draw(context);
+        this.enemy.draw(context);
 
     }
 
