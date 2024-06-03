@@ -1,4 +1,5 @@
-import Player from "../Player.js";
+import PlayerTank from "../PlayerTank.js";
+import StaticTest from "../StaticTest.js";
 
 export default class Layouts {
 
@@ -6,29 +7,29 @@ export default class Layouts {
         this.width = width;
         this.height = height;
 
-        this.layouts = [];
-
-        this.numBlocks = 15;
-        this.baseUnit = this.width / this.numBlocks;
-
-
+        console.log('StaticTest from Layouts: ' + StaticTest.getFromStorage());
 
     }
 
-    createLayout() {
+    test(){
+        console.log("test "+this.x);
+    }
 
+    createLayout() {
+     
         let verticalCenterAlign = this.height;
         let center = {}
 
-        center.x = this.width / 2 - verticalCenterAlign / 2;
-        center.y = this.height / 2 - verticalCenterAlign / 2;
-        center.width = verticalCenterAlign;
-        center.height = verticalCenterAlign;
+        center.name = 'center';
+        center.x = this.width / 2 - this.height / 2;
+        center.y = this.height / 2 - this.height / 2;
+        center.width = this.height;
+        center.height = this.height;
         center.color = 'orange';
-        center.content = this.content;
+        center.storage = this.setToStorage(this.height);
 
-        
         let left = {
+            name: 'left',
             x: 0,
             y: 0,
             width: this.width / 2 - this.height / 2,
@@ -38,6 +39,7 @@ export default class Layouts {
         };
 
         let right = {
+            name: 'right',
             x: left.width + this.height,
             //x: center.x + center.width,
             y: 0,
@@ -47,19 +49,23 @@ export default class Layouts {
             color: "green",
         }
 
-        this.layouts = [left, center, right,];
+        let layouts = [left, center, right,];
 
-        
+        return layouts;
+
     }
 
-    createContentCenter(){
-        
-        this.createLayout();
-        //let x = this.createLayout().center.x;
+    setToStorage(width) {
+        localStorage.setItem('numBlocks', 15);
+        localStorage.setItem('width', width);
+    };
 
-        this.player = new Player(this, 120, 200, 'red');
-        this.enemy = new Player(this,120, 100,'orange');
-        this.content = [this.player,this.enemy];
+    createContentCenter() {
+
+        this.player = new PlayerTank(this, 0, 100, 'red');
+        this.enemy = new PlayerTank(this, 0, 200, 'orange');
+        this.content = [this.player, this.enemy];
+
     }
 
     update() {
@@ -70,23 +76,24 @@ export default class Layouts {
     draw(context) {
 
         this.createContentCenter();
+        let layouts = this.createLayout();
 
-        for (const layout of this.layouts) {
+        for (const layout of layouts) {
             for (const key in layout) {
-                if (layout.hasOwnProperty.call(layout, key)) {
 
                     context.fillStyle = layout['color'];
                     context.fillRect(layout['x'], layout['y'], layout['width'], layout['height']);
 
-                    console.log(key+': '+layout[key]);
-
-                }
-            }
+                    console.log(key + ': ' + layout[key]);
+                    
+            } 
         }
-
+    
         this.player.draw(context);
         this.enemy.draw(context);
 
     }
+
+
 
 }

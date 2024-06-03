@@ -1,14 +1,17 @@
-export default class Player {
-    constructor(game,width,height,color) {
+import StaticTest from "../StaticTest.js";
+
+
+export default class BaseTank {
+    constructor(game,x,y, color) {
         this.game = game;
-        this.width = width;
-        this.height = height;
         this.color = color;
 
-        this.x = 20;
-        this.y = 100;
+        this.x = x;
+        this.y = y;
         this.speedY = 0;
         this.speedX = 0;
+
+        this.base = StaticTest.getFromStorage();
     }
 
     
@@ -20,6 +23,6 @@ export default class Player {
 
     draw(context){
         context.fillStyle = this.color;
-        context.fillRect(this.x,this.y,this.width,this.height);
+        context.fillRect(this.x,this.y,this.base,this.base);
     }
 }
