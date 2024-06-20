@@ -1,4 +1,4 @@
-import PlayerTank from "../PlayerTank.js";
+import PlayerTank from "../Tank/PlayerTank.js";
 import StaticTest from "../StaticTest.js";
 
 export default class Layouts {
@@ -11,12 +11,12 @@ export default class Layouts {
 
     }
 
-    test(){
-        console.log("test "+this.x);
+    test() {
+        console.log("test " + this.x);
     }
 
     createLayout() {
-     
+
         let verticalCenterAlign = this.height;
         let center = {}
 
@@ -56,41 +56,53 @@ export default class Layouts {
     }
 
     setToStorage(width) {
-        localStorage.setItem('numBlocks', 15);
-        localStorage.setItem('width', width);
+        sessionStorage.setItem('numBlocks', 15);
+        sessionStorage.setItem('width', width);
     };
 
     createContentCenter() {
 
-        this.player = new PlayerTank(this, 0, 100, 'red');
-        this.enemy = new PlayerTank(this, 0, 200, 'orange');
-        this.content = [this.player, this.enemy];
+        let player = new PlayerTank(this, 0, 100, 'red');
+        let enemy = new PlayerTank(this, 0, 200, 'orange');
+        let content = [player, enemy];
+
+        return content;
 
     }
 
     update() {
-        this.player.update();
-        this.enemy.update();
+
+        for (const item of this.createContentCenter()) {
+            item.update();
+        }
+
     }
 
     draw(context) {
 
-        this.createContentCenter();
         let layouts = this.createLayout();
 
         for (const layout of layouts) {
             for (const key in layout) {
 
-                    context.fillStyle = layout['color'];
-                    context.fillRect(layout['x'], layout['y'], layout['width'], layout['height']);
+                context.fillStyle = layout.color;
+                context.fillRect(layout['x'], layout['y'], layout['width'], layout['height']);
 
-                    console.log(key + ': ' + layout[key]);
-                    
-            } 
+                console.log(key + ': ' + layout[key]);
+
+            }
         }
-    
-        this.player.draw(context);
-        this.enemy.draw(context);
+
+        let contents = this.createContentCenter();
+
+        //console.log(contents);
+
+        for (let item of contents) {
+
+            item.draw(context, 100);
+            //console.log(item.draw(context));
+            //console.log(item.getTestColor());
+        }
 
     }
 
