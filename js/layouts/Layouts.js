@@ -81,6 +81,7 @@ export default class Layouts {
     draw(context) {
 
         let layouts = this.createLayout();
+        //console.log('createLayout: '+ layouts[0]);
 
         for (const layout of layouts) {
             for (const key in layout) {
@@ -99,7 +100,7 @@ export default class Layouts {
 
         for (let item of contents) {
 
-            item.draw(context, 100);
+            item.draw(context, 200);
             //console.log(item.draw(context));
             //console.log(item.getTestColor());
         }
